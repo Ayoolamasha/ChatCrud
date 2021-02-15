@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <Button
+        android:id="@+id/gallerySend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="image"
+        app:layout_constraintTop_toTopOf="@id/typeMessageContainer"
+        app:layout_constraintBottom_toBottomOf="@id/typeMessageContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/typeMessageContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeWidth="1dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintStart_toEndOf="@id/gallerySend"
+        app:layout_constraintEnd_toStartOf="@id/sendMessage">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="200dp"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textLongMessage|textCapSentences"
+            android:autofillHints="@string/type_a_message"
+            android:hint="@string/type_a_message"
+            android:textSize="16sp"
+            android:ems="10" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/typeMessageContainer"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/gallerySend"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/sendMessage"/>-->
+        <Button
+            android:id="@+id/sendMessage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="send"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toTopOf="@id/typeMessageContainer"
+            app:layout_constraintBottom_toBottomOf="@id/typeMessageContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

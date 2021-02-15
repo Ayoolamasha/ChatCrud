@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- TOP SECTION -->
+
+    <LinearLayout
+        android:id="@+id/topLayoutToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            layout="@layout/top_chat_toolbar"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/topLine"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topLayoutToolBar"/>
+
+    <!-- CENTER RECYCLER -->
+
+    <!--    <ScrollView-->
+    <!--            android:id="@+id/centerLayoutScroll"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/topLine"-->
+    <!--            app:layout_constraintBottom_toTopOf="@id/bottomEditText"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            app:layout_constraintVertical_bias="0">-->
+
+    <!--        <LinearLayout-->
+    <!--                android:id="@+id/centerLayout"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toBottomOf="@id/topLine"-->
+    <!--                app:layout_constraintBottom_toTopOf="@id/bottomEditText"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintVertical_bias="0"-->
+    <!--                android:orientation="vertical">-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatsRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topLine"
+        app:layout_constraintBottom_toTopOf="@id/bottomEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_chat_receive"
+        />
+
+
+    <!--        </LinearLayout>-->
+
+
+    <!--    </ScrollView>-->
+
+
+    <!-- BOTTOM EDIT TEXT -->
+
+    <FrameLayout
+        android:id="@+id/bottomEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal">
+
+        <include layout="@layout/bottom_input_chat_text"/>
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

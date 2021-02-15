@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">test</string>
+    <string name="message">Message</string>
+    <string name="type_a_message">Type a message</string>
+</resources>
