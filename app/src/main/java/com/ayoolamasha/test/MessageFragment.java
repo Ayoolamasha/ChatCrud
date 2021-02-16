@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -75,9 +76,10 @@ public class MessageFragment extends Fragment {
 //                bundle.putString("time", chatMessagePojo.getMessages());
 
 
-                ChatFragment chatFragment = ChatFragment.newInstance("id");
+                ChatFragment chatFragment = ChatFragment.newInstance(chatMessagePojo.getReceiverId());
+                loadFragment(chatFragment);
                 //chatFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.container, chatFragment);
+//                getFragmentManager().beginTransaction().replace(R.id.container, chatFragment);
 
                 Toast.makeText(getActivity(), "Message Clicked", Toast.LENGTH_SHORT).show();
 
@@ -94,6 +96,15 @@ public class MessageFragment extends Fragment {
         messageAdapter = new MessageAdapter();
         recyclerView.setAdapter(messageAdapter);
         deleteAll = view.findViewById(R.id.imageView3);
+
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.isAddToBackStackAllowed();
+        transaction.commit();
 
     }
 

@@ -69,12 +69,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
         super.onCreate(savedInstanceState);
 
         mChatViewModel = new ViewModelProvider(this, new ViewModelFactory(getActivity().getApplication(),mReceiverId)).get(ChatViewModel.class);
-        mChatViewModel.getAllChatViewModel().observe(this, new Observer<List<ChatMessagePojo>>() {
-            @Override
-            public void onChanged(List<ChatMessagePojo> chatMessagePojos) {
-                chatAdapter.submitList(chatMessagePojos);
-            }
-        });
+
 
 
 //        mChatViewModel.getAllChatViewModel().observe(getViewLifecycleOwner(), chatMessagePojos ->
@@ -87,6 +82,32 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.chat_layout, container, false);
 
         initViews(view);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        chatAdapter = new ChatAdapter(chatMessagePojoArrayList);
+        recyclerView.setAdapter(chatAdapter);
+
+        mChatViewModel.getAllChatViewModel().observe(this, new Observer<List<ChatMessagePojo>>() {
+            @Override
+            public void onChanged(List<ChatMessagePojo> chatMessagePojos) {
+                if (chatMessagePojos == null){
+
+                    Toast.makeText(getActivity(), "Message EMPTY" , Toast.LENGTH_SHORT).show();
+
+                }else{
+                    chatAdapter.submitList(chatMessagePojos);
+                    Toast.makeText(getActivity(), "Message FETECHED" , Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
+
+
+
+
 
         sendMessage.setOnClickListener(this);
 //
@@ -115,9 +136,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
         inputText = view.findViewById(R.id.typeMessage);
         sendMessage = view.findViewById(R.id.sendMessage);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        chatAdapter = new ChatAdapter(chatMessagePojoArrayList);
-        recyclerView.setAdapter(chatAdapter);
     }
 
     @Override
@@ -150,6 +168,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onDetach() {
         super.onDetach();
+        INSTANCE = null;
         ChatFragment chatFragment = new ChatFragment();
         MessageFragment messageFragment = new MessageFragment();
         loadFragmentWithoutBackstack(chatFragment, messageFragment);
@@ -161,12 +180,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
     private void saveChat(){
 
         message = inputText.getText().toString().trim();
-//                if (message != null && !TextUtils.isEmpty(message)){
-//                    chatMessagePojoArrayList.add(message);
-//                }
-//                String message = inputText.getText().toString().trim();
-//                Log.d("The Text", "onClick: " + message);
-//
         if (message!= null && !TextUtils.isEmpty(message)){
 
             // time sent
@@ -177,7 +190,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
 //                    chatList.add(new String[]{message, leftTimer});
 
             // message
-            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer,"id");
+            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer,"id2");
             chatMessagePojoArrayList.add(messageSent);
             //chatAdapter.notifyDataSetChanged();
             //mChatViewModel.sendMessage(messageSent);
@@ -195,12 +208,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
 
     private void updateChat(){
         message = inputText.getText().toString().trim();
-//                if (message != null && !TextUtils.isEmpty(message)){
-//                    chatMessagePojoArrayList.add(message);
-//                }
-//                String message = inputText.getText().toString().trim();
-//                Log.d("The Text", "onClick: " + message);
-//
+
         if (message!= null && !TextUtils.isEmpty(message)){
 
             // time sent
