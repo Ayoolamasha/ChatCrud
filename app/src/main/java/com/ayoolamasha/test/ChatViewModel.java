@@ -20,10 +20,9 @@ public class ChatViewModel extends AndroidViewModel {
 
 
 
-    public ChatViewModel(@NonNull Application application) {
+    public ChatViewModel(@NonNull Application application, String params) {
         super(application);
-
-        repository = new ChatRepository(application);
+        repository = new ChatRepository(application,params);
         listLiveData = repository.getAllMessagePojoListRepo();
         getListChatLiveData = repository.getAllLastMessagePojoListRepo();
     }

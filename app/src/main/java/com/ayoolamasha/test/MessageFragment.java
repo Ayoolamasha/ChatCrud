@@ -75,8 +75,8 @@ public class MessageFragment extends Fragment {
 //                bundle.putString("time", chatMessagePojo.getMessages());
 
 
-                ChatFragment chatFragment = new ChatFragment();
-                chatFragment.setArguments(bundle);
+                ChatFragment chatFragment = ChatFragment.newInstance("id");
+                //chatFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.container, chatFragment);
 
                 Toast.makeText(getActivity(), "Message Clicked", Toast.LENGTH_SHORT).show();

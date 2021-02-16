@@ -35,7 +35,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
 
 
         if(modelClass == ChatViewModel.class) {
-            return (T) new ChatViewModel(application);
+            return (T) new ChatViewModel(application,params);
         }
         return  null;
     }

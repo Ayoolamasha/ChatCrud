@@ -37,10 +37,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
     private static final String EXTRA_TIME = "com.ayoolamasha.test.EXTRA_TIME";
 
 
+    private static ChatFragment INSTANCE;
     private RecyclerView recyclerView;
     private Button sendMessage, mBackArrow, fetchGallery;
     //private EditText inputText;
     private TextInputEditText inputText;
+    private String mReceiverId;
     private ChatAdapter chatAdapter;
     private ArrayList<ChatMessagePojo> chatMessagePojoArrayList = new ArrayList<>();
     private String message, leftTimer;
@@ -48,11 +50,25 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
     private ChatViewModel mChatViewModel;
 
 
+    public static ChatFragment newInstance(String receiverId) {
+        if (INSTANCE == null) {
+            return new ChatFragment(receiverId);
+        }
+        return INSTANCE;
+    }
+
+    private ChatFragment(String receiverId) {
+        this.mReceiverId = receiverId;
+    }
+
+    private ChatFragment(){
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mChatViewModel = new ViewModelProvider(this, new ViewModelFactory(getActivity().getApplication())).get(ChatViewModel.class);
+        mChatViewModel = new ViewModelProvider(this, new ViewModelFactory(getActivity().getApplication(),mReceiverId)).get(ChatViewModel.class);
         mChatViewModel.getAllChatViewModel().observe(this, new Observer<List<ChatMessagePojo>>() {
             @Override
             public void onChanged(List<ChatMessagePojo> chatMessagePojos) {
@@ -161,7 +177,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
 //                    chatList.add(new String[]{message, leftTimer});
 
             // message
-            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer);
+            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer,"id");
             chatMessagePojoArrayList.add(messageSent);
             //chatAdapter.notifyDataSetChanged();
             //mChatViewModel.sendMessage(messageSent);
@@ -195,7 +211,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
 //                    chatList.add(new String[]{message, leftTimer});
 
             // message
-            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer);
+            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer,"id");
             chatMessagePojoArrayList.add(messageSent);
             //chatAdapter.notifyDataSetChanged();
             //mChatViewModel.sendMessage(messageSent);

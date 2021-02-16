@@ -11,13 +11,22 @@ public class ChatRepository {
     private LiveData<List<ChatMessagePojo>> messagePojoList;
     private LiveData<List<ChatMessagePojo>> lastMessagePojoList;
 
-    public ChatRepository(Application application) {
 
+    public ChatRepository(Application application) {
         ChatDatabase chatDatabase = ChatDatabase.getInstance(application);
         chatDao = chatDatabase.chatDao();
         messagePojoList = chatDao.getAllChatDao();
-        lastMessagePojoList = chatDao.getAllLastChatDao();
+        lastMessagePojoList = chatDao.getAllLastChat();
     }
+
+    public ChatRepository(Application application,String receiverId) {
+        ChatDatabase chatDatabase = ChatDatabase.getInstance(application);
+        chatDao = chatDatabase.chatDao();
+        messagePojoList = chatDao.getAllChatDao(receiverId);
+        lastMessagePojoList = chatDao.getAllLastChat();
+    }
+
+
 
 
     public void saveChatRepo(ChatMessagePojo chatMessagePojo){

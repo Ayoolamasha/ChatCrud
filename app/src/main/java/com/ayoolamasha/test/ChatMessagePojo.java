@@ -10,11 +10,26 @@ public class ChatMessagePojo {
     private int chatId;
     private String messages;
     private String timer;
+    private String receiverId;
 
 
-    public ChatMessagePojo(String messages, String timer) {
+    /*public ChatMessagePojo(String messages, String timer) {
         this.messages = messages;
         this.timer = timer;
+    }*/
+
+    public String getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public ChatMessagePojo(String messages, String timer, String receiverId) {
+        this.messages = messages;
+        this.timer = timer;
+        this.receiverId = receiverId;
     }
 
     public int getChatId() {
