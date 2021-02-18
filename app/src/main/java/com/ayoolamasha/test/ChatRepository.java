@@ -22,7 +22,7 @@ public class ChatRepository {
     public ChatRepository(Application application,String receiverId) {
         ChatDatabase chatDatabase = ChatDatabase.getInstance(application);
         chatDao = chatDatabase.chatDao();
-        messagePojoList = chatDao.getAllChatDao(receiverId);
+        messagePojoList = chatDao.getAllChat(receiverId);
         lastMessagePojoList = chatDao.getAllLastChat();
     }
 

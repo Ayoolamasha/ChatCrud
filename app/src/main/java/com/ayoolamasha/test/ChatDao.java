@@ -30,9 +30,9 @@ public interface ChatDao {
     @Query("SELECT * FROM chat_table ORDER BY timer DESC")
     LiveData<List<ChatMessagePojo>> getAllLastChatDao();
 
-    @Query("SELECT * FROM chat_table WHERE receiverId = :userId ORDER BY timer DESC")
-    LiveData<List<ChatMessagePojo>> getAllChatDao(String userId);
+    @Query("SELECT * FROM chat_table WHERE receiverId = :userId ORDER BY chatId")
+    LiveData<List<ChatMessagePojo>> getAllChat(String userId);
 
-    @Query("SELECT * FROM chat_table group by receiverId ORDER BY timer DESC LIMIT 1")
+    @Query("SELECT * FROM chat_table group by receiverId ORDER BY timer DESC")
     LiveData<List<ChatMessagePojo>> getAllLastChat();
 }

@@ -68,16 +68,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mChatViewModel = new ViewModelProvider(this, new ViewModelFactory(getActivity().getApplication(),mReceiverId)).get(ChatViewModel.class);
-        mChatViewModel.getAllChatViewModel().observe(this, new Observer<List<ChatMessagePojo>>() {
-            @Override
-            public void onChanged(List<ChatMessagePojo> chatMessagePojos) {
-                chatAdapter.submitList(chatMessagePojos);
-            }
-        });
+        mChatViewModel = new ViewModelProvider(this, new ViewModelFactory(getActivity().getApplication(),mReceiverId))
+                .get(ChatViewModel.class);
 
-
-//        mChatViewModel.getAllChatViewModel().observe(getViewLifecycleOwner(), chatMessagePojos ->
+        //        mChatViewModel.getAllChatViewModel().observe(getViewLifecycleOwner(), chatMessagePojos ->
 //                chatMessagePojoArrayList.add((ChatMessagePojo) chatMessagePojos));
     }
 
@@ -88,7 +82,16 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
 
         initViews(view);
 
+        mChatViewModel.getAllChatViewModel().observe(this, new Observer<List<ChatMessagePojo>>() {
+            @Override
+            public void onChanged(List<ChatMessagePojo> chatMessagePojos) {
+                chatAdapter.submitList(chatMessagePojos);
+            }
+        });
+
         sendMessage.setOnClickListener(this);
+
+
 //
 //        Bundle bundle = this.getArguments();
 //        assert bundle != null;
@@ -115,8 +118,9 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
         inputText = view.findViewById(R.id.typeMessage);
         sendMessage = view.findViewById(R.id.sendMessage);
 
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        chatAdapter = new ChatAdapter(chatMessagePojoArrayList);
+        chatAdapter = new ChatAdapter();
         recyclerView.setAdapter(chatAdapter);
     }
 
@@ -172,13 +176,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
             // time sent
             Calendar calendar = Calendar.getInstance();
             Date date = calendar.getTime();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa");
             leftTimer = simpleDateFormat.format(date);
 //                    chatList.add(new String[]{message, leftTimer});
 
             // message
-            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer,"id");
-            chatMessagePojoArrayList.add(messageSent);
+            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer,"id3");
+            //chatMessagePojoArrayList.add(messageSent);
             //chatAdapter.notifyDataSetChanged();
             //mChatViewModel.sendMessage(messageSent);
             mChatViewModel.insertChatViewModel(messageSent);
@@ -206,13 +210,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
             // time sent
             Calendar calendar = Calendar.getInstance();
             Date date = calendar.getTime();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa");
             leftTimer = simpleDateFormat.format(date);
 //                    chatList.add(new String[]{message, leftTimer});
 
             // message
-            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer,"id");
-            chatMessagePojoArrayList.add(messageSent);
+            ChatMessagePojo messageSent = new ChatMessagePojo(message, leftTimer,"id3");
+            //chatMessagePojoArrayList.add(messageSent);
             //chatAdapter.notifyDataSetChanged();
             //mChatViewModel.sendMessage(messageSent);
             mChatViewModel.updateChatViewModel(messageSent);

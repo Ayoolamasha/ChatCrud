@@ -20,7 +20,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     public ViewModelFactory(@NonNull Application application) {
 
         this.application = application;
-        params = null;
+        this.params = null;
     }
 
     public ViewModelFactory(@NonNull Application application, @NonNull String params) {

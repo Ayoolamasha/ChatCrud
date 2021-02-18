@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -70,14 +71,14 @@ public class MessageFragment extends Fragment {
             @Override
             public void onItemClick(ChatMessagePojo chatMessagePojo) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("id", chatMessagePojo.getChatId());
+                //bundle.putInt("id", chatMessagePojo.getChatId());
 //                bundle.putString("Message", chatMessagePojo.getMessages());
 //                bundle.putString("time", chatMessagePojo.getMessages());
 
 
-                ChatFragment chatFragment = ChatFragment.newInstance("id");
+                ChatFragment chatFragment = ChatFragment.newInstance(chatMessagePojo.getReceiverId());
                 //chatFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.container, chatFragment);
+                loadFragment(chatFragment);
 
                 Toast.makeText(getActivity(), "Message Clicked", Toast.LENGTH_SHORT).show();
 
@@ -129,5 +130,22 @@ public class MessageFragment extends Fragment {
 //        (activity as? MainActivity)?.replace(newFragment, tag)
 //    }
 
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.isAddToBackStackAllowed();
+        transaction.commit();
+
+    }
+
+    private void loadFragmentWithoutBackstack(Fragment currentFragment, Fragment nextFragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, nextFragment);
+        transaction.remove(currentFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+    }
 
 }

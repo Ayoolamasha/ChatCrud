@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {ChatMessagePojo.class}, version = 2)
+@Database(entities = {ChatMessagePojo.class}, version = 3)
 public abstract class ChatDatabase  extends RoomDatabase{
 
     public abstract ChatDao chatDao();
