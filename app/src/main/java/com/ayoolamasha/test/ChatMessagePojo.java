@@ -13,11 +13,6 @@ public class ChatMessagePojo {
     private String receiverId;
 
 
-    /*public ChatMessagePojo(String messages, String timer) {
-        this.messages = messages;
-        this.timer = timer;
-    }*/
-
     public String getReceiverId() {
         return receiverId;
     }

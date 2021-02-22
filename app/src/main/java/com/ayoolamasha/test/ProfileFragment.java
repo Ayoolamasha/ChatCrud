@@ -34,11 +34,6 @@ public class ProfileFragment extends Fragment{
             }
         });
 
-//        Log.i("Button pressed", "onCreateView: " );
-//        Intent intent = new Intent(getActivity(), ChatFragment.class);
-//        Log.i("Sending the intent", "onCreateView: " );
-//        Objects.requireNonNull(getActivity()).startActivityForResult(intent, 1);
-//        Log.i("intent Sent", "onCreateView: " + intent );
 
         return view;
     }

@@ -18,7 +18,6 @@ public class ChatAdapter extends ListAdapter<ChatMessagePojo, ChatAdapter.Custom
 
     public ChatAdapter() {
         super(diffCallback);
-        //this.chatMessagePojoArrayList = chatMessagePojoArrayList;
     }
 
     private static final DiffUtil.ItemCallback<ChatMessagePojo> diffCallback = new DiffUtil.ItemCallback<ChatMessagePojo>() {
@@ -34,9 +33,6 @@ public class ChatAdapter extends ListAdapter<ChatMessagePojo, ChatAdapter.Custom
         }
     };
 
-//    public ChatAdapter(ArrayList<ChatMessagePojo> chatMessagePojoArrayList) {
-//        this.chatMessagePojoArrayList = chatMessagePojoArrayList;
-//    }
 
     @NonNull
     @Override
@@ -48,7 +44,6 @@ public class ChatAdapter extends ListAdapter<ChatMessagePojo, ChatAdapter.Custom
 
     @Override
     public void onBindViewHolder(@NonNull ChatAdapter.CustomViewHolder holder, int position) {
-        //ChatMessagePojo chatMessagePojo = chatMessagePojoArrayList.get(position);
         ChatMessagePojo chatMessagePojo = getItem(position);
         holder.message.setText(chatMessagePojo.getMessages());
         holder.timeLeft.setText(chatMessagePojo.getTimer());

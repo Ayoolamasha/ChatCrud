@@ -24,12 +24,6 @@ public interface ChatDao {
     @Query("DELETE FROM chat_table")
     void deleteAllChatDao();
 
-    @Query("SELECT * FROM chat_table ORDER BY chatId ")
-    LiveData<List<ChatMessagePojo>> getAllChatDao();
-
-    @Query("SELECT * FROM chat_table ORDER BY timer DESC")
-    LiveData<List<ChatMessagePojo>> getAllLastChatDao();
-
     @Query("SELECT * FROM chat_table WHERE receiverId = :userId ORDER BY chatId")
     LiveData<List<ChatMessagePojo>> getAllChat(String userId);
 
