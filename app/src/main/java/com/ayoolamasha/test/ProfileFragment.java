@@ -29,6 +29,7 @@ public class ProfileFragment extends Fragment{
         messageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 loadFragment(ChatFragment.newInstance("id3"));
 
             }

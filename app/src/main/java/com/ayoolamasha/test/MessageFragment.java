@@ -69,9 +69,12 @@ public class MessageFragment extends Fragment {
         messageAdapter.setOnClickListener(new MessageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ChatMessagePojo chatMessagePojo) {
+        
+
                 ChatFragment chatFragment = ChatFragment.newInstance(chatMessagePojo.getReceiverId());
                 loadFragment(chatFragment);
 
+                Toast.makeText(getActivity(), "Message Clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -86,6 +89,15 @@ public class MessageFragment extends Fragment {
         messageAdapter = new MessageAdapter();
         recyclerView.setAdapter(messageAdapter);
         deleteAll = view.findViewById(R.id.imageView3);
+
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.isAddToBackStackAllowed();
+        transaction.commit();
 
     }
 
