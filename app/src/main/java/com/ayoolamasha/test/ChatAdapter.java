@@ -16,26 +16,23 @@ public class ChatAdapter extends ListAdapter<ChatMessagePojo, ChatAdapter.Custom
     private ArrayList<ChatMessagePojo> chatMessagePojoArrayList = new ArrayList<>();
 
 
-    public ChatAdapter(ArrayList<ChatMessagePojo> chatMessagePojoArrayList) {
+    public ChatAdapter() {
         super(diffCallback);
-        this.chatMessagePojoArrayList = chatMessagePojoArrayList;
     }
 
     private static final DiffUtil.ItemCallback<ChatMessagePojo> diffCallback = new DiffUtil.ItemCallback<ChatMessagePojo>() {
         @Override
         public boolean areItemsTheSame(@NonNull ChatMessagePojo oldItem, @NonNull ChatMessagePojo newItem) {
-            return false;
+            return oldItem.getChatId() == newItem.getChatId();
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull ChatMessagePojo oldItem, @NonNull ChatMessagePojo newItem) {
-            return false;
+            return oldItem.getMessages().equals(newItem.getMessages()) &&
+                    oldItem.getTimer().equals(newItem.getTimer());
         }
     };
 
-//    public ChatAdapter(ArrayList<ChatMessagePojo> chatMessagePojoArrayList) {
-//        this.chatMessagePojoArrayList = chatMessagePojoArrayList;
-//    }
 
     @NonNull
     @Override
@@ -47,16 +44,16 @@ public class ChatAdapter extends ListAdapter<ChatMessagePojo, ChatAdapter.Custom
 
     @Override
     public void onBindViewHolder(@NonNull ChatAdapter.CustomViewHolder holder, int position) {
-        ChatMessagePojo chatMessagePojo = chatMessagePojoArrayList.get(position);
+        ChatMessagePojo chatMessagePojo = getItem(position);
         holder.message.setText(chatMessagePojo.getMessages());
         holder.timeLeft.setText(chatMessagePojo.getTimer());
 
     }
 
-    @Override
+    /*@Override
     public int getItemCount() {
         return chatMessagePojoArrayList.size();
-    }
+    }*/
 
     public class CustomViewHolder extends RecyclerView.ViewHolder{
         private TextView message, timeLeft;

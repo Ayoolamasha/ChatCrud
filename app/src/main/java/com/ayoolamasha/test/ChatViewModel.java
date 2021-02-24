@@ -15,8 +15,6 @@ public class ChatViewModel extends AndroidViewModel {
     private LiveData<List<ChatMessagePojo>> listLiveData;
     private LiveData<List<ChatMessagePojo>> getListChatLiveData;
 
-    public static final int SAVE_INIT_CHAT = 1;
-    public static final int UPDATE_CHAT = 2;
 
 
 

@@ -29,16 +29,12 @@ public class ProfileFragment extends Fragment{
         messageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(ChatFragment.newInstance("id"));
+
+                loadFragment(ChatFragment.newInstance("id3"));
 
             }
         });
 
-//        Log.i("Button pressed", "onCreateView: " );
-//        Intent intent = new Intent(getActivity(), ChatFragment.class);
-//        Log.i("Sending the intent", "onCreateView: " );
-//        Objects.requireNonNull(getActivity()).startActivityForResult(intent, 1);
-//        Log.i("intent Sent", "onCreateView: " + intent );
 
         return view;
     }

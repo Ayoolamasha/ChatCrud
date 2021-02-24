@@ -57,7 +57,6 @@ public class MessageFragment extends Fragment {
 
         initView(view);
 
-        //getTargetFragment().onActivityResult(getTargetRequestCode(),1, bundle);
 
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,16 +69,10 @@ public class MessageFragment extends Fragment {
         messageAdapter.setOnClickListener(new MessageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ChatMessagePojo chatMessagePojo) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", chatMessagePojo.getChatId());
-//                bundle.putString("Message", chatMessagePojo.getMessages());
-//                bundle.putString("time", chatMessagePojo.getMessages());
-
+        
 
                 ChatFragment chatFragment = ChatFragment.newInstance(chatMessagePojo.getReceiverId());
                 loadFragment(chatFragment);
-                //chatFragment.setArguments(bundle);
-//                getFragmentManager().beginTransaction().replace(R.id.container, chatFragment);
 
                 Toast.makeText(getActivity(), "Message Clicked", Toast.LENGTH_SHORT).show();
 
@@ -109,36 +102,22 @@ public class MessageFragment extends Fragment {
     }
 
 
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.isAddToBackStackAllowed();
+        transaction.commit();
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(getTargetFragment().)
-//    }
+    }
 
+    private void loadFragmentWithoutBackstack(Fragment currentFragment, Fragment nextFragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, nextFragment);
+        transaction.remove(currentFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        // We set the listener on the child fragmentManager
-//        getChildFragmentManager()
-//                .setFragmentResultListener("requestKey", this, new FragmentResultListener() {
-//                    @Override
-//                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-//                        String result = bundle.getString("bundleKey");
-//                        // Do something with the result
-//                    }
-//                });
-//    }
-
-
-//    private fun launchSetNameFragment() {
-//        val newFragment = SetNameFragment()
-//        val tag = SetNameFragment::class.java.simpleName
-//
-//        newFragment.setTargetFragment(this, SET_NAME_REQUEST_CODE)
-//        (activity as? MainActivity)?.replace(newFragment, tag)
-//    }
-
+    }
 
 }
